@@ -1,0 +1,4 @@
+# Example of achievements to unlock
+HealthPotion: Health Potion
+AttackPotion: Attack Potion
+SilverSword: Silver Sword

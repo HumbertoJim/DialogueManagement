@@ -1,0 +1,4 @@
+# Example of settings
+language: English
+music_volume: 1
+sound_volume: 1

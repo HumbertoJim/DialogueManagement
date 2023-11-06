@@ -1,0 +1,6 @@
+# Example of Places
+Garden: Jardin
+School: Colegio
+Mountain: Montana
+River: Rio
+Shop: Tienda

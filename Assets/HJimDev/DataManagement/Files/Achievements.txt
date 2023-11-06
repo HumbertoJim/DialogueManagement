@@ -1,0 +1,5 @@
+# Example of achievements to unlock
+open_10_chests
+explore_10_cities
+buy_10_items
+get_3_characters

@@ -1,0 +1,4 @@
+# Example of user information
+username: Pietro-kun
+gender: 2
+age: 21

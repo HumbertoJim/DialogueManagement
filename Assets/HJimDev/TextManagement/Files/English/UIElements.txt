@@ -1,0 +1,10 @@
+# Example of ui element texts
+
+# Buttons
+Play: Play
+Settings: Settings
+Exit: Salir
+
+# Titles
+MainMenu: Main Menu
+Credits: Credits

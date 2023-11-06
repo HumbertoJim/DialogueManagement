@@ -1,0 +1,10 @@
+# Example of ui element texts
+
+# Buttons
+Play: Jugar
+Settings: Configuraciones
+Exit: Salir
+
+# Titles
+MainMenu: Menu Principal
+Credits: Creditos
