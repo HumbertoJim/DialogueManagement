@@ -16,7 +16,7 @@ namespace DialogueManagement
             [SerializeField] Dialoguer mainCharacter;
             [SerializeField] Dialoguer[] dialoguers;
 
-            public Dictionary<string, Dialoguer> Dialoguers { get; private set; }
+            Dictionary<string, Dialoguer> Dialoguers { get; set; }
 
             Dictionary<string, string> names;
 
@@ -90,6 +90,11 @@ namespace DialogueManagement
                     return name;
                 }
                 return "no_name";
+            }
+
+            public Dialoguer GetDialoguer(string code)
+            {
+                return Dialoguers[code];
             }
         }
     }
