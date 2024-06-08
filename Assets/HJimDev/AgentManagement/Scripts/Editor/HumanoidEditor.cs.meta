@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ed57b552efd4abe4ab860f93065a2ef9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - modelPrefab: {fileID: 919132149155446097, guid: 0a6a11fde646e544d9ee0fff9d6cf627,
+      type: 3}
+  - idleAction: {fileID: 11400000, guid: 5840e6f2c09576f438a0456103cd46f9, type: 2}
+  - defaultAction: {fileID: 11400000, guid: 5840e6f2c09576f438a0456103cd46f9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
