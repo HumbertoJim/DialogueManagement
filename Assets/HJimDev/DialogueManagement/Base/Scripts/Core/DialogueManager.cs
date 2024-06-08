@@ -16,6 +16,18 @@ namespace DialogueManagement
     {
         public abstract class DialogueManager: MonoBehaviour
         {
+            public class DataSet {
+                public UserDataManager User { get; private set; }
+                public DialogueData Dialogue { get; private set; }
+                public SettingDataManager Settings { get; private set; }
+                public DataSet(UserDataManager userData, DialogueData dialogueData, SettingDataManager settingData)
+                {
+                    User = userData;
+                    Dialogue = dialogueData;
+                    Settings = settingData;
+                }
+            }
+
             [Header("Dependencies")]
             [SerializeField] TextManager textManager;
             [SerializeField] DialogueData dialogueData;
@@ -82,12 +94,13 @@ namespace DialogueManagement
             public bool IsImageShown { set; get; }
             public ApplicationHandler ApplicationHandler { get { return applicationHandler; } }
             public DialoguerCluster DialoguerCluster { get { return dialoguerCluster; } }
-            public SettingDataManager SettingData { get { return settingData; } }
+            public DataSet Data { get; private set; }
 
             protected void Awake()
             {
                 Scheduler = new Scheduler();
                 executingCommand = false;
+                Data = new(userData, dialogueData, settingData);
             }
 
             private void Start()
