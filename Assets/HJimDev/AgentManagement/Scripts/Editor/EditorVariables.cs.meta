@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 63d4f0c509e04e04cba70c0e741791e3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - genericPrefab: {fileID: 6654209499488895985, guid: 08236ad6c17ba184b8a24c0d88f22ac2,
+      type: 3}
+  - humanoidPrefab: {fileID: 7626547601763497882, guid: ea578939c7119714cb4c0afa986bcdbf,
+      type: 3}
+  - vrmPrefab: {fileID: 3321119921439206247, guid: a0ee5b5af9f34804dafc393a23cde213,
+      type: 3}
+  - genericAnimatorController: {fileID: 9100000, guid: 2b867787248d60043bb03ddd5828477e,
+      type: 2}
+  - humanoidAnimatorController: {fileID: 9100000, guid: cad2a76074274dd4b80f9a7f946bb004,
+      type: 2}
+  - vrmAnimatorController: {fileID: 9100000, guid: 131d88768f0ff0f4cab8e6e463002578,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
