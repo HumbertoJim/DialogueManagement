@@ -1,0 +1,3 @@
+# Example of Dialogue
+Test: Player:?;?Hola?;?CharacterA:?;?Hola, {Player}?;?CharacterB:?;?¿Cómo están??;?Player:?;?Muy bien.
+dialogue_01: Player:?n?Hola

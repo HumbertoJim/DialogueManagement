@@ -40,7 +40,7 @@ namespace DialogueManagement
                     {
                         if (line != "" && line[^1] == ':')
                         {
-                            CurrentDialoguer = line[^1..].Trim();
+                            CurrentDialoguer = line[..^1].Trim();
                         }
                     }
                     CurrentLine++;

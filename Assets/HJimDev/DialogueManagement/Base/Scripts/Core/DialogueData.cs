@@ -17,32 +17,32 @@ namespace DialogueManagement
 
             public int GetChoice(string choiceID)
             {
-                return Serializer.GetDataAsInt("choice", choiceID);
+                return Serializer.GetDataAsInt("Choices", choiceID);
             }
 
             public void SetChoice(string choiceID, int value)
             {
-                Serializer.SetData("choice", choiceID, value.ToString());
+                Serializer.SetData("Choices", choiceID, value.ToString());
             }
 
             public bool ChoiceExists(string choiceID)
             {
-                return Serializer.DataExists("choice", choiceID);
+                return Serializer.DataExists("Choices", choiceID);
             }
 
             public bool GetFlag(string flagID)
             {
-                return Serializer.GetDataAsBool("flag", flagID);
+                return Serializer.GetDataAsBool("Flags", flagID);
             }
 
             public void SetFlag(string flagID, bool value)
             {
-                Serializer.SetData("flag", flagID, value);
+                Serializer.SetData("Flags", flagID, value);
             }
 
             public bool FlagExists(string flagID)
             {
-                return Serializer.DataExists("flag", flagID);
+                return Serializer.DataExists("Flags", flagID);
             }
         }
     }

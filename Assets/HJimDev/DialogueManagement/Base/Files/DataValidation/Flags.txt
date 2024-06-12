@@ -1,0 +1,5 @@
+# Example of Flags
+foo: false
+test: false
+in_love: false
+boss_killed: false
