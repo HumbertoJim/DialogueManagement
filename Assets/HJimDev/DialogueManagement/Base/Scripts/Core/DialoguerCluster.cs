@@ -28,12 +28,16 @@ namespace DialogueManagement
             {
                 Dialoguers = new Dictionary<string, Dialoguer>();
                 names = new Dictionary<string, string>();
+            }
+
+            protected virtual void Start()
+            {
                 foreach (Dialoguer dialoguer in dialoguers)
                 {
                     Dialoguers.Add(dialoguer.Code, dialoguer);
-                    names.Add(dialoguer.Code, textManager.GetText("Name", dialoguer.Code));
+                    names.Add(dialoguer.Code, textManager.GetText("Characters", dialoguer.Code));
                 }
-                names.Add("Storyteller", textManager.GetText("Name", "Storyteller"));
+                names.Add("Storyteller", textManager.GetText("Characters", "Storyteller"));
             }
 
             public virtual void SetEnable(string code, bool value)
@@ -74,7 +78,7 @@ namespace DialogueManagement
 
             public void StopTalking(string code)
             {
-                if (Dialoguers.TryGetValue(code, out Dialoguer dialoguer))
+                if (code != null && Dialoguers.TryGetValue(code, out Dialoguer dialoguer))
                 {
                     dialoguer.StopTalking();
                 }
@@ -97,6 +101,15 @@ namespace DialogueManagement
             public Dialoguer GetDialoguer(string code)
             {
                 return Dialoguers[code];
+            }
+
+            public Dialoguer GetCurrentDialoguer()
+            {
+                if(currentDialoguer != null)
+                {
+                    return GetDialoguer(currentDialoguer);
+                }
+                return null;
             }
         }
     }

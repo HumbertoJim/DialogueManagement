@@ -14,39 +14,50 @@ namespace DialogueManagement
 {
     namespace Core
     {
-        public abstract class DialogueManager: MonoBehaviour
+        public class DialogueManager: MonoBehaviour
         {
+            [Serializable]
             public class DataSet {
-                public UserDataManager User { get; private set; }
-                public DialogueData Dialogue { get; private set; }
-                public SettingDataManager Settings { get; private set; }
-                public DataSet(UserDataManager userData, DialogueData dialogueData, SettingDataManager settingData)
-                {
-                    User = userData;
-                    Dialogue = dialogueData;
-                    Settings = settingData;
-                }
+                [SerializeField] UserDataManager user;
+                [SerializeField] DialogueData dialogue;
+                [SerializeField] SettingDataManager settings;
+                public UserDataManager User { get { return user; } }
+                public DialogueData Dialogue { get { return dialogue; } }
+                public SettingDataManager Settings { get { return settings; } }
+            }
+            [Serializable]
+            public class KeyWords
+            {
+                [SerializeField] string command = "run";
+                [SerializeField] string enter = "?n?";
+                [SerializeField] string line_separator = "?;?";
+                [SerializeField] string audio_fixer_separator = "::"; // Primero el nombre del audio, luego el texto. Ejemplo. audio532::Hola, como estas.
+                [SerializeField] string ini_if = "if";
+                [SerializeField] string end_if = "end_if";
+                [SerializeField] string condition_separator = "&";
+                [SerializeField] string replace_ini = "{"; // Para reemplazar una id por su string correspondiente
+                [SerializeField] string replace_end = "}";
+
+                public string Command { get { return command; } }
+                public string Enter { get { return enter; } }
+                public string LineSeparator { get { return line_separator; } }
+                public string AudioFixerSeparator { get { return audio_fixer_separator; } }
+                public string If { get { return ini_if; } }
+                public string EndIf { get { return end_if; } }
+                public string ConditionSeparator { get { return condition_separator; } }
+                public string ReplaceIni { get { return replace_ini; } }
+                public string ReplaceEnd { get { return replace_end; } }
             }
 
             [Header("Dependencies")]
             [SerializeField] TextManager textManager;
-            [SerializeField] DialogueData dialogueData;
-            [SerializeField] UserDataManager userData;
             [SerializeField] ApplicationHandler applicationHandler;
             [SerializeField] DialoguerCluster dialoguerCluster;
-            [SerializeField] SettingDataManager settingData;
+            [SerializeField] DataSet data;
 
             [Header("Modules")]
             [SerializeField] Module[] modules;
-            const string KEY_COMMAND = "run";
-            const string KEY_ENTER = "?n?";
-            const string KEY_LINE_SEPARATOR = "?;?";
-            const string KEY_AUDIO_FIXER_SEPARATOR = "::"; // Primero el nombre del audio, luego el texto. Ejemplo. audio532::Hola, como estas.
-            const string KEY_IF = "if";
-            const string KEY_END_IF = "end_if";
-            const string KEY_CONDITION_SEPARATOR = "&";
-            const string KEY_REPLACE_INI = "{"; // Para reemplazar una id por su string correspondiente
-            const string KEY_REPLACE_FIN = "}";
+            [SerializeField] KeyWords keyWords;
 
             [Header("UI Elements")]
             [SerializeField] TMP_Text nameLabel;
@@ -60,7 +71,6 @@ namespace DialogueManagement
             [SerializeField] Animator textLabelAnimator;
             bool showingTextLabel; // animating showing
             bool isTextLabelShown;
-            Coroutine showingTextLabelCoroutine;
 
             [Header("Fade Settings")]
             [SerializeField] float fadeTime = 3f;
@@ -84,29 +94,26 @@ namespace DialogueManagement
             public Scheduler Scheduler { get; private set; }
 
             public string ErrorMessages { set { errorMessages.text = value; } }
-            public Dialogue CurrentDialogue { get; }
-            public Transform ChoiceContainer { get; }
-            public GameObject ChoicePrefab { get; }
+            public Transform ChoiceContainer { get { return choiceContainer; } }
+            public GameObject ChoicePrefab { get { return choicePrefab; } }
             public bool IsChoicing { set; get; }
             public bool OnFadeIn { get; set; }
             public string InitialText { set; private get; }
             public Image ImageLabel { get { return imageLabel; } }
             public bool IsImageShown { set; get; }
+            public bool IsPlaying { get { return currentDialogue != null; } }
             public ApplicationHandler ApplicationHandler { get { return applicationHandler; } }
             public DialoguerCluster DialoguerCluster { get { return dialoguerCluster; } }
-            public DataSet Data { get; private set; }
+            public DataSet Data { get { return data; } }
 
             protected void Awake()
             {
                 Scheduler = new Scheduler();
                 executingCommand = false;
-                Data = new(userData, dialogueData, settingData);
             }
 
             private void Start()
             {
-                ResetDefault();
-
                 Scheduler.Add(
                     "Sleep",
                     new AdditiveSchedulable(
@@ -158,15 +165,16 @@ namespace DialogueManagement
                             {
                                 textLabel.text += textToWrite[0];
                                 textToWrite = textToWrite[1..]; // PROBAR ESTO, QUE SI SE ADMITE CUANDO LA CADENA ES DE LONGITUD 1
+                                Scheduler.Start("WriteText");
+                            }
+                            else
+                            {
+                                InitialText = "";
                                 if (IsChoicing)
                                 {
                                     choiceContainer.gameObject.SetActive(true);
                                     ApplicationHandler.SetEnable("Mouse", true);
                                 }
-                            }
-                            else
-                            {
-                                InitialText = "";
                             }
                         }
                     )
@@ -179,6 +187,8 @@ namespace DialogueManagement
                     "ShowTextLabel",
                     new Schedulable(1f, () => { textLabelAnimator.SetTrigger("Show"); Scheduler.Start("NotifyTextLabelIsShown"); })
                 );
+
+                ResetDefault();
             }
 
             void ResetDefault()
@@ -210,7 +220,7 @@ namespace DialogueManagement
 
             string[] ReadDialogueContent(string dialogueID)
             {
-                return textManager.GetText("Dialogue", dialogueID).Split(new string[] { KEY_LINE_SEPARATOR }, StringSplitOptions.None);
+                return textManager.GetText("Dialogues", dialogueID).Split(new string[] { keyWords.LineSeparator}, StringSplitOptions.None);
             }
 
             private void Update()
@@ -234,8 +244,6 @@ namespace DialogueManagement
                 );
                 if (play)
                 {
-                    Debug.Log("Dialogue: " + dialogue.ID);
-
                     ResetDefault();
 
                     currentDialogue = dialogue;
@@ -367,7 +375,7 @@ namespace DialogueManagement
                         if (currentDialoguer == playerCode)
                         {
                             dialoguerCluster.SetTalker(null);
-                            nameLabel.text = userData.Username;
+                            nameLabel.text = Data.User.Username;
                         }
                         else
                         {
@@ -377,9 +385,9 @@ namespace DialogueManagement
                     }
                     return true;
                 }
-                else if (Tools.StringExtensions.TextStartsWith(line, KEY_COMMAND))
+                else if (Tools.StringExtensions.TextStartsWith(line, keyWords.Command))
                 {
-                    line = line[KEY_COMMAND.Length..].Trim();
+                    line = line[keyWords.Command.Length..].Trim();
                     foreach (Module module in modules)
                     {
                         if (Tools.StringExtensions.TextStartsWith(line, module.ModuleName))
@@ -392,31 +400,31 @@ namespace DialogueManagement
                     ErrorMessages = "MODULE NAME ERROR: invalid MODULE NAME in \"" + line + "\"";
                     return true;
                 }
-                else if (Tools.StringExtensions.TextStartsWith(line, KEY_IF))
+                else if (Tools.StringExtensions.TextStartsWith(line, keyWords.If))
                 {
-                    ApplyIf(line[KEY_IF.Length..].Trim());
+                    ApplyIf(line[keyWords.If.Length..].Trim());
                     return true;
                 }
-                else if (Tools.StringExtensions.TextStartsWith(line, KEY_END_IF))
+                else if (Tools.StringExtensions.TextStartsWith(line, keyWords.EndIf))
                 {
                     return true;
                 }
 
                 string text;
                 string audioName;
-                if (line.Contains(KEY_AUDIO_FIXER_SEPARATOR))
+                if (line.Contains(keyWords.AudioFixerSeparator))
                 {
-                    string[] audioAndText = line.Split(new string[] { KEY_AUDIO_FIXER_SEPARATOR }, StringSplitOptions.None);
-                    text = audioAndText[1].Trim().Replace(KEY_ENTER, "\n");
+                    string[] audioAndText = line.Split(new string[] { keyWords.AudioFixerSeparator }, StringSplitOptions.None);
+                    text = audioAndText[1].Trim().Replace(keyWords.Enter, "\n");
                     audioName = audioAndText[0].Trim();
                 }
                 else
                 {
-                    text = line.Replace(KEY_ENTER, "\n");
+                    text = line.Replace(keyWords.Enter, "\n");
                     audioName = null;
                 }
 
-                if (text.Contains(KEY_REPLACE_INI))
+                if (text.Contains(keyWords.ReplaceIni))
                 {
                     text = ReplaceString(text);
                 }
@@ -493,7 +501,7 @@ namespace DialogueManagement
                 {
                     IsChoicing = false;
 
-                    dialogueData.SetChoice(choiceID, choice);
+                    Data.Dialogue.SetChoice(choiceID, choice);
 
                     foreach (Transform child in choiceContainer)
                     {
@@ -517,7 +525,7 @@ namespace DialogueManagement
 
             void ApplyIf(string line)
             {
-                string[] sentences = line.Split(new string[] { KEY_CONDITION_SEPARATOR }, StringSplitOptions.None);
+                string[] sentences = line.Split(new string[] { keyWords.ConditionSeparator }, StringSplitOptions.None);
                 bool flag = true;
                 foreach (string sentence in sentences)
                 {
@@ -527,11 +535,11 @@ namespace DialogueManagement
                 {
                     Dialogue.Line ignore_line = currentDialogue.Next(ignoreDialoguer: true);
                     int nEndIf = 0;
-                    while (ignore_line.NotNull && !(nEndIf == 0 && Tools.StringExtensions.TextStartsWith(ignore_line.Text, KEY_END_IF)))
+                    while (ignore_line.NotNull && !(nEndIf == 0 && Tools.StringExtensions.TextStartsWith(ignore_line.Text, keyWords.EndIf)))
                     {
-                        if (Tools.StringExtensions.TextStartsWith(ignore_line.Text, KEY_IF))
+                        if (Tools.StringExtensions.TextStartsWith(ignore_line.Text, keyWords.If))
                             nEndIf++;
-                        if (Tools.StringExtensions.TextStartsWith(ignore_line.Text, KEY_END_IF))
+                        if (Tools.StringExtensions.TextStartsWith(ignore_line.Text, keyWords.EndIf))
                             nEndIf--;
                         ignore_line = currentDialogue.Next(ignoreDialoguer: true);
                     }
@@ -558,27 +566,27 @@ namespace DialogueManagement
                 {
                     if (sentenceStruct[2] == ">")
                     {
-                        result = dialogueData.GetChoice(sentenceStruct[1]) > Convert.ToInt16(sentenceStruct[3]);
+                        result = Data.Dialogue.GetChoice(sentenceStruct[1]) > Convert.ToInt16(sentenceStruct[3]);
                     }
                     else if (sentenceStruct[2] == ">=")
                     {
-                        result = dialogueData.GetChoice(sentenceStruct[1]) >= Convert.ToInt16(sentenceStruct[3]);
+                        result = Data.Dialogue.GetChoice(sentenceStruct[1]) >= Convert.ToInt16(sentenceStruct[3]);
                     }
                     else if (sentenceStruct[2] == "<")
                     {
-                        result = dialogueData.GetChoice(sentenceStruct[1]) < Convert.ToInt16(sentenceStruct[3]);
+                        result = Data.Dialogue.GetChoice(sentenceStruct[1]) < Convert.ToInt16(sentenceStruct[3]);
                     }
                     else if (sentenceStruct[2] == "<=")
                     {
-                        result = dialogueData.GetChoice(sentenceStruct[1]) <= Convert.ToInt16(sentenceStruct[3]);
+                        result = Data.Dialogue.GetChoice(sentenceStruct[1]) <= Convert.ToInt16(sentenceStruct[3]);
                     }
                     else if (sentenceStruct[2] == "==")
                     {
-                        result = dialogueData.GetChoice(sentenceStruct[1]) == Convert.ToInt16(sentenceStruct[3]);
+                        result = Data.Dialogue.GetChoice(sentenceStruct[1]) == Convert.ToInt16(sentenceStruct[3]);
                     }
                     else if (sentenceStruct[2] == "!=")
                     {
-                        result = dialogueData.GetChoice(sentenceStruct[1]) != Convert.ToInt16(sentenceStruct[3]);
+                        result = Data.Dialogue.GetChoice(sentenceStruct[1]) != Convert.ToInt16(sentenceStruct[3]);
                     }
                     else
                     {
@@ -592,22 +600,22 @@ namespace DialogueManagement
                     {
                         if (sentenceStruct[3].ToLower() == "true")
                         {
-                            result = dialogueData.GetFlag(sentenceStruct[1]) == true;
+                            result = Data.Dialogue.GetFlag(sentenceStruct[1]) == true;
                         }
                         else
                         {
-                            result = dialogueData.GetFlag(sentenceStruct[1]) == false;
+                            result = Data.Dialogue.GetFlag(sentenceStruct[1]) == false;
                         }
                     }
                     else if (sentenceStruct[2] == "!=")
                     {
                         if (sentenceStruct[3].ToLower() == "true")
                         {
-                            result = dialogueData.GetFlag(sentenceStruct[1]) != true;
+                            result = Data.Dialogue.GetFlag(sentenceStruct[1]) != true;
                         }
                         else
                         {
-                            result = dialogueData.GetFlag(sentenceStruct[1]) != false;
+                            result = Data.Dialogue.GetFlag(sentenceStruct[1]) != false;
                         }
                     }
                     else
@@ -636,12 +644,12 @@ namespace DialogueManagement
             string ReplaceString(string originalText)
             {
                 string newText = originalText;
-                int n_ini = KEY_REPLACE_INI.Length;
-                int n_fin = KEY_REPLACE_FIN.Length;
+                int n_ini = keyWords.ReplaceIni.Length;
+                int n_fin = keyWords.ReplaceEnd.Length;
                 string stringID = "";
                 for (int i = 0; i < (originalText.Length - n_ini - n_fin); i++)
                 {
-                    if (originalText.Substring(i, n_ini) == KEY_REPLACE_INI)
+                    if (originalText.Substring(i, n_ini) == keyWords.ReplaceIni)
                     {
                         i += n_ini;
                         for (; i < (originalText.Length - n_fin + 1); i++)
@@ -651,15 +659,15 @@ namespace DialogueManagement
                                 stringID = "";
                                 break;
                             }
-                            if (originalText.Substring(i, n_fin) == KEY_REPLACE_FIN)
+                            if (originalText.Substring(i, n_fin) == keyWords.ReplaceEnd)
                             {
-                                if (stringID == "player")
+                                if (stringID == playerCode)
                                 {
-                                    newText = newText.Replace(KEY_REPLACE_INI + stringID + KEY_REPLACE_FIN, "\"" + userData.Username + "\"");
+                                    newText = newText.Replace(keyWords.ReplaceIni + stringID + keyWords.ReplaceEnd, "\"" + Data.User.Username + "\"");
                                 }
                                 else
                                 {
-                                    newText = newText.Replace(KEY_REPLACE_INI + stringID + KEY_REPLACE_FIN, "\"unknown_key\"");
+                                    newText = newText.Replace(keyWords.ReplaceIni + stringID + keyWords.ReplaceEnd, "\"unknown_key\"");
                                 }
                                 i += n_fin - 1;
                                 stringID = "";

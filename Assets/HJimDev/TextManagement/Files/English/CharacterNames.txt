@@ -1,3 +1,6 @@
 # Example of achievements to unlock
 Caeli: Caeli Da Jim
 Sayah: Sayah Kubra
+Storyteller: Narrador
+CharacterA: Character A
+CharacterB: Character B
