@@ -35,7 +35,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY TEXT COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY TEXT COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

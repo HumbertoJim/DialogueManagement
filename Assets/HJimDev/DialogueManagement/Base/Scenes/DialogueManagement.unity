@@ -1804,6 +1804,34 @@ PrefabInstance:
       propertyPath: applicationHandler
       value: 
       objectReference: {fileID: 784569881}
+    - target: {fileID: 9056927330768254832, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
+      propertyPath: uiElements.fadeLabel
+      value: 
+      objectReference: {fileID: 2025929171}
+    - target: {fileID: 9056927330768254832, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
+      propertyPath: uiElements.nameLabel
+      value: 
+      objectReference: {fileID: 1855105356}
+    - target: {fileID: 9056927330768254832, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
+      propertyPath: uiElements.textImage
+      value: 
+      objectReference: {fileID: 1834349000}
+    - target: {fileID: 9056927330768254832, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
+      propertyPath: uiElements.imageLabel
+      value: 
+      objectReference: {fileID: 385275338}
+    - target: {fileID: 9056927330768254832, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
+      propertyPath: uiElements.dialogueLabel
+      value: 
+      objectReference: {fileID: 2084558471}
+    - target: {fileID: 9056927330768254832, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
+      propertyPath: uiElements.errorMessages
+      value: 
+      objectReference: {fileID: 664484808}
+    - target: {fileID: 9056927330768254832, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
+      propertyPath: uiElements.textLabelAnimator
+      value: 
+      objectReference: {fileID: 2193905251961670643}
     - target: {fileID: 9056927330768254833, guid: 300b3a6c95bc5c84d9801cc6cfce4ec7, type: 3}
       propertyPath: m_RootOrder
       value: 0

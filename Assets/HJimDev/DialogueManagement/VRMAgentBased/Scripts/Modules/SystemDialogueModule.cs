@@ -47,7 +47,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY SYS COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY SYS COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

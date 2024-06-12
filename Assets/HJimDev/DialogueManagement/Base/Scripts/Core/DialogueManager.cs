@@ -48,6 +48,32 @@ namespace DialogueManagement
                 public string ReplaceIni { get { return replace_ini; } }
                 public string ReplaceEnd { get { return replace_end; } }
             }
+            [Serializable]
+            public class UIElements
+            {
+                [SerializeField] Animator textLabelAnimator;
+                [SerializeField] TMP_Text nameLabel;
+                [SerializeField] TMP_Text dialogueLabel;
+                [SerializeField] Image imageLabel;
+                [SerializeField] TMP_Text textImage;
+                [SerializeField] TMP_Text errorMessages;
+                [SerializeField] Image fadeLabel;
+
+                public Animator TextLabelAnimator { get { return textLabelAnimator; } }
+                public string NameLabel { set { nameLabel.text = value; } }
+                public string DialogueLabel
+                {
+                    get { return dialogueLabel.text; }
+                    set { dialogueLabel.text = value; }
+                }
+                public Image ImageLabel { get { return imageLabel; } set { imageLabel = value; } }
+                public string TextImage {set { textImage.text = value; } }
+                public string ErrorMessages { set { errorMessages.text = value; } }
+                public float FadeLabel {
+                    get { return fadeLabel.color.a; }
+                    set { fadeLabel.color = new Color(fadeLabel.color.r, fadeLabel.color.g, fadeLabel.color.b, value); }
+                }
+            }
 
             [Header("Dependencies")]
             [SerializeField] TextManager textManager;
@@ -55,20 +81,10 @@ namespace DialogueManagement
             [SerializeField] DialoguerCluster dialoguerCluster;
             [SerializeField] DataSet data;
 
-            [Header("Modules")]
+            [Header("Modules and Modules")]
             [SerializeField] Module[] modules;
             [SerializeField] KeyWords keyWords;
-
-            [Header("UI Elements")]
-            [SerializeField] TMP_Text nameLabel;
-            [SerializeField] TMP_Text textLabel;
-            [SerializeField] Image imageLabel;
-            [SerializeField] TMP_Text textImage;
-            [SerializeField] TMP_Text errorMessages;
-            [SerializeField] Image fadeLabel;
-
-            [Header("UI Animators")]
-            [SerializeField] Animator textLabelAnimator;
+            [SerializeField] UIElements uiElements;
             bool showingTextLabel; // animating showing
             bool isTextLabelShown;
 
@@ -92,19 +108,17 @@ namespace DialogueManagement
             bool executingCommand;
 
             public Scheduler Scheduler { get; private set; }
-
-            public string ErrorMessages { set { errorMessages.text = value; } }
             public Transform ChoiceContainer { get { return choiceContainer; } }
             public GameObject ChoicePrefab { get { return choicePrefab; } }
             public bool IsChoicing { set; get; }
             public bool OnFadeIn { get; set; }
             public string InitialText { set; private get; }
-            public Image ImageLabel { get { return imageLabel; } }
             public bool IsImageShown { set; get; }
             public bool IsPlaying { get { return currentDialogue != null; } }
             public ApplicationHandler ApplicationHandler { get { return applicationHandler; } }
             public DialoguerCluster DialoguerCluster { get { return dialoguerCluster; } }
             public DataSet Data { get { return data; } }
+            public UIElements UI { get { return uiElements; } }
 
             protected void Awake()
             {
@@ -129,9 +143,9 @@ namespace DialogueManagement
                         0.1f,
                         () =>
                         {
-                            float alpha = fadeLabel.color.a + 1f / fadeTime * 0.1f;
+                            float alpha = UI.FadeLabel + 1f / fadeTime * 0.1f;
                             alpha = alpha > 1 ? 1 : alpha;
-                            fadeLabel.color = new Color(fadeLabel.color.r, fadeLabel.color.g, fadeLabel.color.b, alpha);
+                            UI.FadeLabel = alpha;
                             if (alpha < 1)
                             {
                                 Scheduler.Start("FadeIn");
@@ -145,9 +159,9 @@ namespace DialogueManagement
                         0.1f,
                         () =>
                         {
-                            float alpha = fadeLabel.color.a - 1f / fadeTime * 0.1f;
+                            float alpha = UI.FadeLabel - 1f / fadeTime * 0.1f;
                             alpha = alpha < 0 ? 0 : alpha;
-                            fadeLabel.color = new Color(fadeLabel.color.r, fadeLabel.color.g, fadeLabel.color.b, alpha);
+                            UI.FadeLabel = alpha;
                             if (alpha > 0)
                             {
                                 Scheduler.Start("FadeOut");
@@ -163,7 +177,7 @@ namespace DialogueManagement
                         {
                             if (textToWrite.Length > 0)
                             {
-                                textLabel.text += textToWrite[0];
+                                UI.DialogueLabel += textToWrite[0];
                                 textToWrite = textToWrite[1..]; // PROBAR ESTO, QUE SI SE ADMITE CUANDO LA CADENA ES DE LONGITUD 1
                                 Scheduler.Start("WriteText");
                             }
@@ -185,7 +199,7 @@ namespace DialogueManagement
                 );
                 Scheduler.Add(
                     "ShowTextLabel",
-                    new Schedulable(1f, () => { textLabelAnimator.SetTrigger("Show"); Scheduler.Start("NotifyTextLabelIsShown"); })
+                    new Schedulable(1f, () => { UI.TextLabelAnimator.SetTrigger("Show"); Scheduler.Start("NotifyTextLabelIsShown"); })
                 );
 
                 ResetDefault();
@@ -249,7 +263,7 @@ namespace DialogueManagement
                     currentDialogue = dialogue;
                     currentDialoguer = currentDialogue.CurrentDialoguer;
 
-                    nameLabel.text = dialoguerCluster.GetDialoguerName(currentDialoguer);
+                    UI.NameLabel = dialoguerCluster.GetDialoguerName(currentDialoguer);
 
                     // once a dialogue is called to play, animate labels to set as shown and when animation finish,
                     // automatically invoke the Next() function
@@ -263,12 +277,12 @@ namespace DialogueManagement
                 if (isTextLabelShown)
                 {
                     isTextLabelShown = false;
-                    textLabelAnimator.SetTrigger("Hide");
+                    UI.TextLabelAnimator.SetTrigger("Hide");
                     Scheduler.Start("ShowTextLabel");
                 }
                 else
                 {
-                    textLabelAnimator.SetTrigger("Show");
+                    UI.TextLabelAnimator.SetTrigger("Show");
                     Scheduler.Start("NotifyTextLabelIsShown");
                 }
             }
@@ -299,7 +313,7 @@ namespace DialogueManagement
                 if (Scheduler.IsActive("WriteText"))
                 {
                     Scheduler.Cancel("WriteText");
-                    textLabel.text += textToWrite;
+                    UI.DialogueLabel += textToWrite;
                     InitialText = "";
                     if (IsChoicing)
                     {
@@ -347,7 +361,7 @@ namespace DialogueManagement
                 if (currentDialogue != null)
                 {
                     isTextLabelShown = false;
-                    textLabelAnimator.SetTrigger("Hide");
+                    UI.TextLabelAnimator.SetTrigger("Hide");
 
                     ResetDefault();
 
@@ -375,12 +389,12 @@ namespace DialogueManagement
                         if (currentDialoguer == playerCode)
                         {
                             dialoguerCluster.SetTalker(null);
-                            nameLabel.text = Data.User.Username;
+                            UI.NameLabel = Data.User.Username;
                         }
                         else
                         {
                             dialoguerCluster.SetTalker(currentDialogue.CurrentDialoguer);
-                            nameLabel.text = dialoguerCluster.GetDialoguerName();
+                            UI.NameLabel = dialoguerCluster.GetDialoguerName();
                         }
                     }
                     return true;
@@ -397,7 +411,7 @@ namespace DialogueManagement
                             return true;
                         }
                     }
-                    ErrorMessages = "MODULE NAME ERROR: invalid MODULE NAME in \"" + line + "\"";
+                    UI.ErrorMessages = "MODULE NAME ERROR: invalid MODULE NAME in \"" + line + "\"";
                     return true;
                 }
                 else if (Tools.StringExtensions.TextStartsWith(line, keyWords.If))
@@ -444,7 +458,7 @@ namespace DialogueManagement
             {
                 Scheduler.Cancel("WriteText");
                 textToWrite = text;
-                textLabel.text = InitialText;
+                UI.DialogueLabel = InitialText;
                 Scheduler.Start("WriteText");
             }
 
@@ -480,13 +494,13 @@ namespace DialogueManagement
                 OnFadeIn = value;
                 if (value)
                 {
-                    fadeLabel.color = new Color(fadeLabel.color.r, fadeLabel.color.g, fadeLabel.color.b, 1);
+                    UI.FadeLabel = 1;
                     ApplicationHandler.SetEnable("CameraRotation", false);
                     ApplicationHandler.SetEnable("Interactions", false);
                 }
                 else
                 {
-                    fadeLabel.color = new Color(fadeLabel.color.r, fadeLabel.color.g, fadeLabel.color.b, 0);
+                    UI.FadeLabel = 0;
                     if (!IsImageShown && !IsChoicing)
                     {
                         ApplicationHandler.SetEnable("CameraRotation", true);
@@ -519,7 +533,6 @@ namespace DialogueManagement
                     Next();
                 }
             }
-
 
             // -------------------- Past Methos --------------------
 
@@ -620,7 +633,7 @@ namespace DialogueManagement
                     }
                     else
                     {
-                        ErrorMessages = "EvaluateConditional ERROR: invalid flag comparison in \"" + sentence + "\"";
+                        UI.ErrorMessages = "EvaluateConditional ERROR: invalid flag comparison in \"" + sentence + "\"";
                         result = false;
                     }
                 }

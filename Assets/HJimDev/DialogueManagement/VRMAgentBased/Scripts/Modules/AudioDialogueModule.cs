@@ -33,7 +33,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY AUDIO COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY AUDIO COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

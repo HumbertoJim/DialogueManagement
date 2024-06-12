@@ -124,7 +124,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY CHARACTER COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY CHARACTER COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

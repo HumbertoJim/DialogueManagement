@@ -31,7 +31,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY CAMERA COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY CAMERA COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }
