@@ -36,9 +36,9 @@ namespace DialogueManagement
                     command = command.Substring(KEY_SHOW.Length).Trim();
                     if (command != "")
                     {
-                        dialogueManager.ImageLabel.sprite = Resources.Load<Sprite>(resourcesFolderLocation + command);
+                        dialogueManager.UI.ImageLabel.sprite = Resources.Load<Sprite>(resourcesFolderLocation + command);
                     }
-                    dialogueManager.ImageLabel.color = new Color(1, 1, 1, 1);
+                    dialogueManager.UI.ImageLabel.color = new Color(1, 1, 1, 1);
                 }
                 else if (Tools.StringExtensions.TextStartsWith(command, KEY_HIDE))
                 {
@@ -47,12 +47,12 @@ namespace DialogueManagement
                         dialogueManager.ApplicationHandler.SetEnable("CameraRotation", true);
                         dialogueManager.ApplicationHandler.SetEnable("UserInteractions", true);
                     }
-                    dialogueManager.ImageLabel.color = new Color(1, 1, 1, 0);
+                    dialogueManager.UI.ImageLabel.color = new Color(1, 1, 1, 0);
                     dialogueManager.IsImageShown = false;
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY IMAGE COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY IMAGE COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }
