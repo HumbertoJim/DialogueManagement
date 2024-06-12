@@ -1,0 +1,6 @@
+# Example of Places
+foo: 0
+dialogue_01_choice_01: 0
+dialogue_01_choice_02: 0
+dialogue_02_choice_01: 0
+dialogue_03_choice_01: 0
