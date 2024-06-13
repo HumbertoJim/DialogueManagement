@@ -259,11 +259,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17599fb59498f174d9cb559a570b3d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 4507656929509202298}
+  dialogueManager: {fileID: 671820449317228795}
   mainCharacter: {fileID: 0}
-  dialoguers:
-  - {fileID: 0}
-  - {fileID: 0}
+  storyteller: {fileID: 0}
+  dialoguers: []
   cameraTransform: {fileID: 0}
   cameraMovement: 3
 --- !u!1001 &1666499057800099489

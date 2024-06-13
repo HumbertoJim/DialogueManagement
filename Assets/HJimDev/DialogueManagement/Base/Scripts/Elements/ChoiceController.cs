@@ -16,7 +16,7 @@ namespace DialogueManagement
             //[SerializeField] PlaySound soundController;
             [SerializeField] TMP_Text choiceText;
             [SerializeField] bool autoAddListener = true;
-            Core.DialogueManager dialogueManager;
+            Base.Core.DialogueManager dialogueManager;
             string choiceID;
             int choice;
 
@@ -25,7 +25,7 @@ namespace DialogueManagement
                 dialogueManager.SelectChoice(choiceID, choice);
             }
 
-            public void SetInformation(Core.DialogueManager dialogueManager, string choiceID, int choice, string text)
+            public void SetInformation(Base.Core.DialogueManager dialogueManager, string choiceID, int choice, string text)
             {
                 this.dialogueManager = dialogueManager;
                 this.choiceID = choiceID;

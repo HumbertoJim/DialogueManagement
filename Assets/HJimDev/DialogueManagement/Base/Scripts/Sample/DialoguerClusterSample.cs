@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace DialogueManagement
 {
-    namespace Core
+    namespace Base
     {
         namespace Sample
         {
-            public class DialoguerClusterSample : DialoguerCluster
+            public class DialoguerClusterSample : Core.DialoguerCluster
             {
                 [SerializeField] Transform cameraTransform;
                 [SerializeField] float cameraMovement = 3;
@@ -18,8 +18,18 @@ namespace DialogueManagement
                 public override void SetTalker(string code)
                 {
                     base.SetTalker(code);
-                    Dialoguer dialoguer = GetCurrentDialoguer();
-                    target = dialoguer ? dialoguer.transform : MainCharacter.transform;
+                    if(CurrentTalker == MainCharacter.Code)
+                    {
+                        target = MainCharacter.transform;
+                    }
+                    else if(CurrentDialoguer != null)
+                    {
+                        target = CurrentDialoguer.transform;
+                    }
+                    else
+                    {
+                        target = null;
+                    }
                 }
 
                 private void Update()

@@ -9,45 +9,48 @@ namespace DialogueManagement
 {
     namespace VRMAgentBased
     {
-        public class SystemDialogueModule : Core.Module
+        namespace Modules
         {
-            public override string ModuleName => "sys";
-
-            const string KEY_SLEEP = "sleep";
-            const string KEY_CHOICE = "choice";
-            const string KEY_FLAG = "flag"; // para configurar una variable.
-
-            const string KEY_CHOICE_SEPARATOR = "|";
-
-            public override void HandleCommand(string command)
+            public class SystemDialogueModule : Base.Modules.Module
             {
-                if (Tools.StringExtensions.TextStartsWith(command, KEY_CHOICE))
+                public override string ModuleName => "sys";
+
+                const string KEY_SLEEP = "sleep";
+                const string KEY_CHOICE = "choice";
+                const string KEY_FLAG = "flag"; // para configurar una variable.
+
+                const string KEY_CHOICE_SEPARATOR = "|";
+
+                public override void HandleCommand(string command)
                 {
-                    command = command.Substring(KEY_CHOICE.Length).Trim();
-
-                    dialogueManager.IsChoicing = true;
-
-                    string[] choices = command.Split(new string[] { KEY_CHOICE_SEPARATOR }, StringSplitOptions.None);
-                    command = choices[0].Split(' ')[0];
-                    choices[0] = choices[0].Substring(command.Length).Trim();
-                    for (int i = 0; i < choices.Length; i++)
+                    if (Tools.StringExtensions.TextStartsWith(command, KEY_CHOICE))
                     {
-                        Elements.ChoiceController choiceController = Instantiate(dialogueManager.ChoicePrefab, dialogueManager.ChoiceContainer).GetComponent<Elements.ChoiceController>();
-                        choiceController.SetInformation(dialogueManager, command, i, choices[i].Trim());
+                        command = command.Substring(KEY_CHOICE.Length).Trim();
+
+                        dialogueManager.IsChoicing = true;
+
+                        string[] choices = command.Split(new string[] { KEY_CHOICE_SEPARATOR }, StringSplitOptions.None);
+                        command = choices[0].Split(' ')[0];
+                        choices[0] = choices[0].Substring(command.Length).Trim();
+                        for (int i = 0; i < choices.Length; i++)
+                        {
+                            Elements.ChoiceController choiceController = Instantiate(dialogueManager.ChoicePrefab, dialogueManager.ChoiceContainer).GetComponent<Elements.ChoiceController>();
+                            choiceController.SetInformation(dialogueManager, command, i, choices[i].Trim());
+                        }
                     }
-                }
-                else if (Tools.StringExtensions.TextStartsWith(command, KEY_FLAG))
-                {
-                    dialogueManager.Data.Dialogue.SetFlag(command, true);
-                }
-                else if (Tools.StringExtensions.TextStartsWith(command, KEY_SLEEP))
-                {
-                    command = command.Substring(KEY_SLEEP.Length).Trim();
-                    dialogueManager.Sleep(float.Parse(command));
-                }
-                else
-                {
-                    dialogueManager.UI.ErrorMessages = "KEY SYS COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    else if (Tools.StringExtensions.TextStartsWith(command, KEY_FLAG))
+                    {
+                        dialogueManager.Data.Dialogue.SetFlag(command, true);
+                    }
+                    else if (Tools.StringExtensions.TextStartsWith(command, KEY_SLEEP))
+                    {
+                        command = command.Substring(KEY_SLEEP.Length).Trim();
+                        dialogueManager.Sleep(float.Parse(command));
+                    }
+                    else
+                    {
+                        dialogueManager.UI.ErrorMessages = "KEY SYS COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    }
                 }
             }
         }
