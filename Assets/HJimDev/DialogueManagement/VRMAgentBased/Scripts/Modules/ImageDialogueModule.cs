@@ -13,7 +13,7 @@ namespace DialogueManagement
             [Header("Resources Settings")]
             [SerializeField] string resourcesFolderLocation = "Dialogue/Images";
 
-            public override string ModuleName => "image";
+            public override string ModuleName => "im";
 
             const string KEY_SHOW = "show";
             const string KEY_HIDE = "hide";

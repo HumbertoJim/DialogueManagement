@@ -9,10 +9,10 @@ namespace DialogueManagement
     {
         public class CharacterDialogueModule : Core.Module
         {
-            [Header("Dialoguers")]
-            [SerializeField] DialoguerCluster dialoguers;
+            public override string ModuleName => "ch";
+
             const string INITIAL_COMMAND = "initial";
-            const string LOAD_COMMAND = "";
+            const string LOAD_COMMAND = "load";
             const string MOOD_COMMAND = "";
             const string ANIM_COMMAND = "";
             const string MOVE_COMMAND = "";
@@ -22,6 +22,9 @@ namespace DialogueManagement
             const string REGISTER_INTERACTION_COMMAND = "";
             const string ENABLE_COMMAND = "";
             const string DISABLE_COMMAND = "";
+
+            [Header("Dialoguers")]
+            [SerializeField] DialoguerCluster dialoguers;
 
             public override void HandleCommand(string command)
             {
@@ -33,6 +36,7 @@ namespace DialogueManagement
                     {
                         dialoguer.Agent.Model.LookAt(dialoguers.MainCharacter.Agent.Model.Head);
                         dialoguer.Agent.Rotate(dialoguers.MainCharacter.Agent.Model.Transform);
+                        dialoguer.Agent.EnableRandomAction = false;
                     }
                 }
                 else if (Tools.StringExtensions.TextStartsWith(command, MOOD_COMMAND))

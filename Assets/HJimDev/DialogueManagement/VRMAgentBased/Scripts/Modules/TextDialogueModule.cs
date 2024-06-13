@@ -9,7 +9,7 @@ namespace DialogueManagement
     {
         public class TextDialogueModule : Core.Module
         {
-            public override string ModuleName => "text";
+            public override string ModuleName => "txt";
 
             const string INITIAL_COMMAND = "initial";
             const string EMPTY_OPTION = "-e";

@@ -9,6 +9,8 @@ namespace DialogueManagement
     {
         public class AudioDialogueModule : Core.Module
         {
+            public override string ModuleName => "audio";
+
             const string INITIAL_COMMAND = "initial";
             const string EMPTY_OPTION = "-e";
             const string ENTER_OPTION = "-n";
