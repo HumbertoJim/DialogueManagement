@@ -5,37 +5,40 @@ using UnityEngine;
 
 namespace DialogueManagement
 {
-    namespace Defaults
+    namespace VRMAgentBased
     {
-        public class AudioDialogueModule : Core.Module
+        namespace Modules
         {
-            public override string ModuleName => "audio";
-
-            const string INITIAL_COMMAND = "initial";
-            const string EMPTY_OPTION = "-e";
-            const string ENTER_OPTION = "-n";
-
-            public override void HandleCommand(string command)
+            public class AudioDialogueModule : Base.Modules.Module
             {
-                if (command == INITIAL_COMMAND)
+                public override string ModuleName => "audio";
+
+                const string INITIAL_COMMAND = "initial";
+                const string EMPTY_OPTION = "-e";
+                const string ENTER_OPTION = "-n";
+
+                public override void HandleCommand(string command)
                 {
-                    if (Tools.StringExtensions.TextStartsWith(command, EMPTY_OPTION))
+                    if (command == INITIAL_COMMAND)
                     {
-                        command = command.Substring(EMPTY_OPTION.Length).Trim();
-                    }
-                    else if (Tools.StringExtensions.TextStartsWith(command, ENTER_OPTION))
-                    {
-                        command = command.Substring(ENTER_OPTION.Length).Trim() + "\n";
+                        if (Tools.StringExtensions.TextStartsWith(command, EMPTY_OPTION))
+                        {
+                            command = command.Substring(EMPTY_OPTION.Length).Trim();
+                        }
+                        else if (Tools.StringExtensions.TextStartsWith(command, ENTER_OPTION))
+                        {
+                            command = command.Substring(ENTER_OPTION.Length).Trim() + "\n";
+                        }
+                        else
+                        {
+                            command = command.Substring(ENTER_OPTION.Length).Trim() + " ";
+                        }
+                        dialogueManager.InitialText = command;
                     }
                     else
                     {
-                        command = command.Substring(ENTER_OPTION.Length).Trim() + " ";
+                        dialogueManager.UI.ErrorMessages = "KEY AUDIO COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                     }
-                    dialogueManager.InitialText = command;
-                }
-                else
-                {
-                    dialogueManager.UI.ErrorMessages = "KEY AUDIO COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

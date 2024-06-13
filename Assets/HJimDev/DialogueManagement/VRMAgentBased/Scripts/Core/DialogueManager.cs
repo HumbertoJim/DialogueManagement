@@ -11,9 +11,12 @@ namespace DialogueManagement
 {
     namespace VRMAgentBased
     {
-        public class DialogueManager: Core.DialogueManager
+        namespace Core
         {
+            public class DialogueManager : Base.Core.DialogueManager
+            {
 
+            }
         }
     }
 }

@@ -7,30 +7,35 @@ namespace DialogueManagement
 {
     namespace VRMAgentBased
     {
-        public class DialoguerCluster: Core.DialoguerCluster
+        namespace Core
         {
-            // FALTA AQUI LA REFERENCIA A CHARACTER_DATA, PARA ALMACENAR COSAS COMO LA RELACION ENTRE JUGADOR Y PERSONAJES
-
-            public new Dialoguer MainCharacter { get { return (Dialoguer)base.MainCharacter; } }
-
-            public new Dialoguer GetDialoguer(string code)
+            public class DialoguerCluster : Base.Core.DialoguerCluster
             {
-                return (Dialoguer)base.GetDialoguer(code);
-            }
+                // FALTA AQUI LA REFERENCIA A CHARACTER_DATA, PARA ALMACENAR COSAS COMO LA RELACION ENTRE JUGADOR Y PERSONAJES
 
-            public void ImproveRelationship(string code, int value)
-            {
+                public new Entities.MainCharacter MainCharacter => (Entities.MainCharacter)base.MainCharacter;
+                public new Entities.Storyteller Storyteller => (Entities.Storyteller)base.Storyteller;
+                public new Entities.Dialoguer CurrentDialoguer => (Entities.Dialoguer)base.CurrentDialoguer;
 
-            }
+                public new Entities.Dialoguer GetDialoguer(string code)
+                {
+                    return (Entities.Dialoguer)base.GetDialoguer(code);
+                }
 
-            public void DecreaseRelationship(string code, int value)
-            {
+                public void ImproveRelationship(string code, int value)
+                {
 
-            }
+                }
 
-            public void RegisterInteraction(string code)
-            {
+                public void DecreaseRelationship(string code, int value)
+                {
 
+                }
+
+                public void RegisterInteraction(string code)
+                {
+
+                }
             }
         }
     }

@@ -5,111 +5,140 @@ using System;
 
 namespace DialogueManagement
 {
-    namespace Core
+    namespace Base
     {
-        public class DialoguerCluster: MonoBehaviour
+        namespace Core
         {
-            [Header("Dependencies")]
-            [SerializeField] TextManager textManager;
-
-            [Header("Dialoguers")]
-            [SerializeField] Dialoguer mainCharacter;
-            [SerializeField] Dialoguer[] dialoguers;
-
-            public Dialoguer MainCharacter { get { return mainCharacter; } }
-
-            Dictionary<string, Dialoguer> Dialoguers { get; set; }
-
-            Dictionary<string, string> names;
-
-            string currentDialoguer;
-
-            protected virtual void Awake()
+            public class DialoguerCluster : MonoBehaviour
             {
-                Dialoguers = new Dictionary<string, Dialoguer>();
-                names = new Dictionary<string, string>();
-            }
+                [Header("Dependencies")]
+                [SerializeField] DialogueManager dialogueManager;
 
-            protected virtual void Start()
-            {
-                foreach (Dialoguer dialoguer in dialoguers)
+                [Header("Dialoguers")]
+                [SerializeField] Entities.MainCharacter mainCharacter;
+                [SerializeField] Entities.Storyteller storyteller;
+                [SerializeField] Entities.Dialoguer[] dialoguers;
+
+                public Entities.MainCharacter MainCharacter { get { return mainCharacter; } }
+                public Entities.Storyteller Storyteller { get { return storyteller; } }
+                public Entities.Dialoguer CurrentDialoguer { get; private set; }
+                public string CurrentTalker { get; private set; }
+
+                Dictionary<string, Entities.Dialoguer> _dialoguers;
+                Dictionary<string, string> names;
+
+
+                protected virtual void Awake()
                 {
-                    Dialoguers.Add(dialoguer.Code, dialoguer);
-                    names.Add(dialoguer.Code, textManager.GetText("Characters", dialoguer.Code));
+                    names = new Dictionary<string, string>();
+                    _dialoguers = new Dictionary<string, Entities.Dialoguer>();
                 }
-                names.Add("Storyteller", textManager.GetText("Characters", "Storyteller"));
-            }
 
-            public virtual void SetEnable(string code, bool value)
-            {
-                if (Dialoguers.TryGetValue(code, out Dialoguer dialoguer))
+                protected virtual void Start()
                 {
-                    dialoguer.gameObject.SetActive(value);
+                    names.Add(MainCharacter.Code, dialogueManager.Data.User.Username);
+                    names.Add(Storyteller.Code, dialogueManager.TextManager.GetText("Characters", Storyteller.Code));
+                    foreach (Entities.Dialoguer dialoguer in dialoguers)
+                    {
+                        names.Add(dialoguer.Code, dialogueManager.TextManager.GetText("Characters", dialoguer.Code));
+                        _dialoguers.Add(dialoguer.Code, dialoguer);
+                    }
                 }
-            }
 
-            public virtual void SetTalker(string code)
-            {
-                if (currentDialoguer != code)
+                public virtual void SetEnable(string code, bool value)
                 {
-                    StopTalking();
-                    currentDialoguer = code;
+                    if (code == MainCharacter.Code)
+                    {
+                        MainCharacter.SetEnable(value);
+                    }
+                    else if (code == Storyteller.Code)
+                    {
+                        Storyteller.SetEnable(value);
+                    }
+                    else if (code != null && _dialoguers.TryGetValue(code, out Entities.Dialoguer dialoguer))
+                    {
+                        dialoguer.SetEnable(value);
+                    }
                 }
-            }
 
-            public void Talk(string dialogueID, string audioName = null, string text = null)
-            {
-                Talk(currentDialoguer, dialogueID, audioName, text);
-            }
+                public virtual void SetTalker(string code)
+                {
+                    if (CurrentTalker != code)
+                    {
+                        StopTalking();
+                        CurrentTalker = code;
+                        if (code == null || code == MainCharacter.Code || code == Storyteller.Code)
+                        {
+                            CurrentDialoguer = null;
+                        }
+                        else
+                        {
+                            CurrentDialoguer = _dialoguers.GetValueOrDefault(code, null);
+                        }
+                    }
+                }
 
-            public virtual void Talk(string code, string dialogueID, string audioName = null, string text = null)
-            {
-                if (Dialoguers.TryGetValue(code, out Dialoguer dialoguer))
+                public void Talk(string dialogueID, string audioName = null, string text = null)
+                {
+                    Talk(CurrentTalker, dialogueID, audioName, text);
+                }
+
+                public virtual void Talk(string code, string dialogueID, string audioName = null, string text = null)
                 {
                     AudioClip audio = audioName == null ? null : Resources.Load<AudioClip>("Voices/" + dialogueID + "/" + code + "/" + audioName);
-                    dialoguer.Talk(audio, text);
+                    if (code == MainCharacter.Code)
+                    {
+                        MainCharacter.Talk(audio, text);
+                    }
+                    else if (code == Storyteller.Code)
+                    {
+                        Storyteller.Talk(audio, text);
+                    }
+                    else if (code != null && _dialoguers.TryGetValue(code, out Entities.Dialoguer dialoguer))
+                    {
+                        dialoguer.Talk(audio, text);
+                    }
                 }
-            }
 
-            public void StopTalking()
-            {
-                StopTalking(currentDialoguer);
-            }
-
-            public void StopTalking(string code)
-            {
-                if (code != null && Dialoguers.TryGetValue(code, out Dialoguer dialoguer))
+                public void StopTalking()
                 {
-                    dialoguer.StopTalking();
+                    StopTalking(CurrentTalker);
                 }
-            }
 
-            public string GetDialoguerName()
-            {
-                return GetDialoguerName(currentDialoguer);
-            }
-
-            public string GetDialoguerName(string code)
-            {
-                if (names.TryGetValue(code, out string name))
+                public void StopTalking(string code)
                 {
-                    return name;
+                    if (code == MainCharacter.Code)
+                    {
+                        MainCharacter.StopTalking();
+                    }
+                    else if (code == Storyteller.Code)
+                    {
+                        Storyteller.StopTalking();
+                    }
+                    else if (code != null && _dialoguers.TryGetValue(code, out Entities.Dialoguer dialoguer))
+                    {
+                        dialoguer.StopTalking();
+                    }
                 }
-                return "no_name";
-            }
 
-            public Dialoguer GetDialoguer(string code)
-            {
-                return Dialoguers[code];
-            }
-
-            public Dialoguer GetCurrentDialoguer()
-            {
-                if(currentDialoguer != null)
+                public string GetDialoguerName()
                 {
-                    return GetDialoguer(currentDialoguer);
+                    return GetDialoguerName(CurrentTalker);
                 }
-                return null;
+
+                public string GetDialoguerName(string code)
+                {
+                    if (names.TryGetValue(code, out string name))
+                    {
+                        return name;
+                    }
+                    return "";
+                }
+
+                public Entities.Dialoguer GetDialoguer(string code)
+                {
+                    return _dialoguers.GetValueOrDefault(code, null);
+                }
             }
         }
     }

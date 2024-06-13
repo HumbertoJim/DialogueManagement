@@ -5,15 +5,18 @@ using System;
 
 namespace DialogueManagement
 {
-    namespace Core
+    namespace Base
     {
-        public abstract class ApplicationHandler: MonoBehaviour
+        namespace Core
         {
-            public abstract void SetEnable(string element, bool value);
+            public abstract class ApplicationHandler : MonoBehaviour
+            {
+                public abstract void SetEnable(string element, bool value);
 
-            public abstract void HandleEvent(string eventID, string parameters = "");
+                public abstract void HandleEvent(string eventID, string parameters = "");
 
-            public abstract void NotifyDialogueEnded(string dialogueID);
+                public abstract void NotifyDialogueEnded(string dialogueID);
+            }
         }
     }
 }

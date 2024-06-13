@@ -155,11 +155,57 @@ Transform:
   - {fileID: 1613059452}
   - {fileID: 2095792037}
   - {fileID: 1290769340}
+  - {fileID: 416378453}
   - {fileID: 754600265}
   - {fileID: 1383455108}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &416378452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 416378453}
+  - component: {fileID: 416378454}
+  m_Layer: 0
+  m_Name: Storyteller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &416378453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416378452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 182265965}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &416378454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416378452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b62abd1048988147a53c8926de3bfc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  code: Storyteller
 --- !u!1 &754600264 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2669275955961716244, guid: 7e98c0701de103941b66f3954543ace0, type: 3}
@@ -300,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58ee03aaefb91ad45b26415d0768f0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1290769346
+--- !u!114 &1290769342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,7 +355,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1290769339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86bf3d8839c531f4ea69912415103df8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8128b81bec920d74ca8a58b3d3445e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   code: Player
@@ -452,7 +498,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2669275955961716238, guid: 7e98c0701de103941b66f3954543ace0, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2669275955961716238, guid: 7e98c0701de103941b66f3954543ace0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -622,9 +668,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 182265965}
     m_Modifications:
+    - target: {fileID: 2669275954599754950, guid: 7e98c0701de103941b66f3954543ace0, type: 3}
+      propertyPath: observer
+      value: 
+      objectReference: {fileID: 754600265}
     - target: {fileID: 2669275955961716238, guid: 7e98c0701de103941b66f3954543ace0, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2669275955961716238, guid: 7e98c0701de103941b66f3954543ace0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -847,9 +897,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 574996499734238082, guid: 23a6eac988afc53458d95105b2514640, type: 3}
+      propertyPath: storyteller
+      value: 
+      objectReference: {fileID: 416378454}
+    - target: {fileID: 574996499734238082, guid: 23a6eac988afc53458d95105b2514640, type: 3}
       propertyPath: mainCharacter
       value: 
-      objectReference: {fileID: 1290769346}
+      objectReference: {fileID: 1290769342}
     - target: {fileID: 574996499734238082, guid: 23a6eac988afc53458d95105b2514640, type: 3}
       propertyPath: dialoguers.Array.size
       value: 2

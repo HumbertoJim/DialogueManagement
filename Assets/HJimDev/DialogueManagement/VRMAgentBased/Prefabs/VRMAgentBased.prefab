@@ -259,8 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1853b099a01eda438a36bc09d177ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 738559360846295906}
+  dialogueManager: {fileID: 3463420284664137089}
   mainCharacter: {fileID: 0}
+  storyteller: {fileID: 0}
   dialoguers: []
 --- !u!1001 &988204533325872283
 PrefabInstance:

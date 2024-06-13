@@ -7,9 +7,12 @@ namespace DialogueManagement
 {
     namespace VRMAgentBased
     {
-        public abstract class ApplicationHandler : Core.ApplicationHandler
+        namespace Core
         {
+            public abstract class ApplicationHandler : Base.Core.ApplicationHandler
+            {
 
+            }
         }
     }
 }

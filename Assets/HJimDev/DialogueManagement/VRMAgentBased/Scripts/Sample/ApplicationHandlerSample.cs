@@ -9,9 +9,9 @@ namespace DialogueManagement
     {
         namespace Sample
         {
-            public class ApplicationHandlerSample : ApplicationHandler
+            public class ApplicationHandlerSample : Core.ApplicationHandler
             {
-                [SerializeField] DialogueManager dialogueManager;
+                [SerializeField] Core.DialogueManager dialogueManager;
 
                 private void Update()
                 {
