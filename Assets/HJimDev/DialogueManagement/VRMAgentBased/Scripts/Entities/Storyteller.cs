@@ -13,15 +13,11 @@ namespace DialogueManagement
         {
             public class Storyteller : Base.Entities.Storyteller
             {
-                [SerializeField] VRMAgent agent;
-
-                public VRMAgent Agent { get { return agent; } }
-
                 public override void Talk(AudioClip audio = null, string text = null) { }
 
                 public override void StopTalking() { }
 
-                public override void SetEnable(bool value) { gameObject.SetActive(value); }
+                public override void SetEnable(bool value) { }
             }
         }
     }
