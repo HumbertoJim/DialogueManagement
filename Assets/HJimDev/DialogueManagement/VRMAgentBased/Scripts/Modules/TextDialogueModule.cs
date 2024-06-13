@@ -9,7 +9,7 @@ namespace DialogueManagement
     {
         public class TextDialogueModule : Core.Module
         {
-            public override string ModuleName => "text";
+            public override string ModuleName => "txt";
 
             const string INITIAL_COMMAND = "initial";
             const string EMPTY_OPTION = "-e";
@@ -35,7 +35,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY TEXT COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY TEXT COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

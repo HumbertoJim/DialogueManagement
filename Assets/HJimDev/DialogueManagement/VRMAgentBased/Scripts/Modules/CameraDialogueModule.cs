@@ -9,6 +9,8 @@ namespace DialogueManagement
     {
         public class CameraDialogueModule : Core.Module
         {
+            public override string ModuleName => "camera";
+
             const string KEY_FADE = "fade";
 
             public override void HandleCommand(string command)
@@ -31,7 +33,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY CAMERA COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY CAMERA COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

@@ -9,6 +9,8 @@ namespace DialogueManagement
     {
         public class AudioDialogueModule : Core.Module
         {
+            public override string ModuleName => "audio";
+
             const string INITIAL_COMMAND = "initial";
             const string EMPTY_OPTION = "-e";
             const string ENTER_OPTION = "-n";
@@ -33,7 +35,7 @@ namespace DialogueManagement
                 }
                 else
                 {
-                    dialogueManager.ErrorMessages = "KEY AUDIO COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                    dialogueManager.UI.ErrorMessages = "KEY AUDIO COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
                 }
             }
         }

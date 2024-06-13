@@ -7,10 +7,20 @@ namespace DialogueManagement
 {
     namespace VRMAgentBased
     {
-        namespace Defaults
+        namespace Sample
         {
-            public class DefaultApplicationHandler : ApplicationHandler
+            public class ApplicationHandlerSample : ApplicationHandler
             {
+                [SerializeField] DialogueManager dialogueManager;
+
+                private void Update()
+                {
+                    if (dialogueManager.IsPlaying && Input.GetKeyDown(KeyCode.Space))
+                    {
+                        dialogueManager.Next();
+                    }
+                }
+
                 public override void SetEnable(string element, bool value) { }
 
                 public override void HandleEvent(string eventID, string parameters = "") { }
