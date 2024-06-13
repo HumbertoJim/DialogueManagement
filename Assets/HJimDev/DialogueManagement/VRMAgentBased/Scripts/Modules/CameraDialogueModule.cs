@@ -9,6 +9,8 @@ namespace DialogueManagement
     {
         public class CameraDialogueModule : Core.Module
         {
+            public override string ModuleName => "camera";
+
             const string KEY_FADE = "fade";
 
             public override void HandleCommand(string command)
