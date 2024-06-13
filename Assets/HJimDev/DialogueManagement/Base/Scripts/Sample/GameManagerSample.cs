@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace DialogueManagement
 {
-    namespace Core
+    namespace Base
     {
         namespace Sample
         {
             public class GameManagerSample : MonoBehaviour
             {
                 [Header("Dependencies")]
-                [SerializeField] DialogueManager dialogueManager;
+                [SerializeField] Core.DialogueManager dialogueManager;
     
                 [Header("Test")]
                 [SerializeField] string dialogueCode;

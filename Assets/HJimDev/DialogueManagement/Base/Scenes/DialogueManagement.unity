@@ -231,6 +231,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2d8817abec8a24aa6ffe0990b05106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &394451488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394451489}
+  - component: {fileID: 394451490}
+  m_Layer: 0
+  m_Name: Storyteller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394451489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394451488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 941908997}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394451490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394451488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc811fe07e872a24697320c57c819d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  code: Storyteller
 --- !u!1 &548277487
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +521,7 @@ Transform:
   - {fileID: 1276341159}
   - {fileID: 1075183417}
   - {fileID: 1585190911}
+  - {fileID: 394451489}
   - {fileID: 1349090577}
   - {fileID: 1191898308}
   m_Father: {fileID: 0}
@@ -693,7 +739,7 @@ Transform:
   m_Children:
   - {fileID: 1515862658}
   m_Father: {fileID: 941908997}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1276341157
 GameObject:
@@ -821,7 +867,7 @@ Transform:
   m_Children:
   - {fileID: 548277488}
   m_Father: {fileID: 941908997}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1349090578
 Animator:
@@ -954,7 +1000,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1585190910}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a2c6f642dd5fc45be50b327a10acaf, type: 3}
+  m_Script: {fileID: 11500000, guid: f3db3f8e29a673347878f3649a5d2d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   code: Player
@@ -1168,6 +1214,10 @@ PrefabInstance:
       value: Base
       objectReference: {fileID: 0}
     - target: {fileID: 671820450509676666, guid: 3f0348897b306244eaa379e68c66d4b6, type: 3}
+      propertyPath: storyteller
+      value: 
+      objectReference: {fileID: 394451490}
+    - target: {fileID: 671820450509676666, guid: 3f0348897b306244eaa379e68c66d4b6, type: 3}
       propertyPath: mainCharacter
       value: 
       objectReference: {fileID: 1585190913}
@@ -1175,6 +1225,10 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 709224725}
+    - target: {fileID: 671820450509676666, guid: 3f0348897b306244eaa379e68c66d4b6, type: 3}
+      propertyPath: dialoguers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 671820450509676666, guid: 3f0348897b306244eaa379e68c66d4b6, type: 3}
       propertyPath: dialoguers.Array.data[0]
       value: 

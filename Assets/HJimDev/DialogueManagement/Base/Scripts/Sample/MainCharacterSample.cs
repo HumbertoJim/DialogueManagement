@@ -9,7 +9,7 @@ namespace DialogueManagement
     {
         namespace Sample
         {
-            public class DialoguerSample : Entities.Dialoguer
+            public class MainCharacterSample : Entities.MainCharacter
             {
                 [SerializeField] Animator anim;
                 public override void Talk(AudioClip audio = null, string text = null)
