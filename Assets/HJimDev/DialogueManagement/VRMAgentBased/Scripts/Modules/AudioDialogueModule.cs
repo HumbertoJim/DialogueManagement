@@ -13,27 +13,14 @@ namespace DialogueManagement
             {
                 public override string ModuleName => "audio";
 
-                const string INITIAL_COMMAND = "initial";
-                const string EMPTY_OPTION = "-e";
-                const string ENTER_OPTION = "-n";
+                const string MUSIC_COMMAND = "music";
 
                 public override void HandleCommand(string command)
                 {
-                    if (command == INITIAL_COMMAND)
+                    if (Tools.StringExtensions.TextStartsWith(command, MUSIC_COMMAND))
                     {
-                        if (Tools.StringExtensions.TextStartsWith(command, EMPTY_OPTION))
-                        {
-                            command = command.Substring(EMPTY_OPTION.Length).Trim();
-                        }
-                        else if (Tools.StringExtensions.TextStartsWith(command, ENTER_OPTION))
-                        {
-                            command = command.Substring(ENTER_OPTION.Length).Trim() + "\n";
-                        }
-                        else
-                        {
-                            command = command.Substring(ENTER_OPTION.Length).Trim() + " ";
-                        }
-                        dialogueManager.InitialText = command;
+                        command = command[MUSIC_COMMAND.Length..].Trim();
+                        Debug.Log("Playig: " + command);
                     }
                     else
                     {
