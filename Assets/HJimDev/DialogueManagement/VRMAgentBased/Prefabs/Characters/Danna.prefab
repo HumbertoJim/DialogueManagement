@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3321119919564999093, guid: a0ee5b5af9f34804dafc393a23cde213, type: 3}
       propertyPath: observer
       value: 
-      objectReference: {fileID: 2970540956577137075}
+      objectReference: {fileID: 8797151473534921287}
     - target: {fileID: 3321119921439206247, guid: a0ee5b5af9f34804dafc393a23cde213, type: 3}
       propertyPath: m_Name
       value: Danna
@@ -203,3 +203,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -3956505258223990651, guid: 8c1cd62528b553d46ac0bbc5abe809ba, type: 3}
+--- !u!4 &8797151473534921287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5159078012444724336, guid: 8c1cd62528b553d46ac0bbc5abe809ba, type: 3}
+  m_PrefabInstance: {fileID: 4435333946864150071}
+  m_PrefabAsset: {fileID: 0}

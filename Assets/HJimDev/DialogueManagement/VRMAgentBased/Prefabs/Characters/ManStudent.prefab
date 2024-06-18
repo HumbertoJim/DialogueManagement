@@ -137,6 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -3956505258223990651, guid: 52c556ca556aabd4db415e88c90dcce1, type: 3}
+--- !u!4 &2028119547814016836 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5159078012444724336, guid: 52c556ca556aabd4db415e88c90dcce1, type: 3}
+  m_PrefabInstance: {fileID: 6610697001920183092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9162880985036056479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 3321119919564999093, guid: a0ee5b5af9f34804dafc393a23cde213, type: 3}
       propertyPath: observer
       value: 
-      objectReference: {fileID: 5854656758925626594}
+      objectReference: {fileID: 2028119547814016836}
     - target: {fileID: 3321119921439206247, guid: a0ee5b5af9f34804dafc393a23cde213, type: 3}
       propertyPath: m_Name
       value: ManStudent
