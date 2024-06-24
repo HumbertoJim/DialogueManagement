@@ -1,4 +1,4 @@
-# Example of ui element texts
+﻿# Example of ui element texts
 
 # Buttons
 Play: Jugar
@@ -8,3 +8,6 @@ Exit: Salir
 # Titles
 MainMenu: Menu Principal
 Credits: Creditos
+
+# Test
+WordWithAccent: áéíóúÁÉÍÓÚ

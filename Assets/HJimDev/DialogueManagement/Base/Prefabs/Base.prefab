@@ -272,6 +272,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 671820449644859183}
     m_Modifications:
+    - target: {fileID: 2193905250125521597, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2193905250125521597, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2193905250172140089, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
+      propertyPath: m_text
+      value: "\xC1\xC9\xB4R\xB4\xB4\xCD\xD3\xDAA\xE1\xE9\xED\xF3\xFA"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193905250172140089, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2193905250172140089, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2193905250421038454, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2193905250421038454, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2193905250779823406, guid: a4ec97c5bbdac824cbcc7561c18171f8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -498,6 +526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5067655850665612282, guid: f30031e2cb2363a4da6d773f4d32473d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f30031e2cb2363a4da6d773f4d32473d, type: 3}
 --- !u!114 &4507656929509202298 stripped
@@ -523,6 +555,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 671820450321239384}
     m_Modifications:
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onSaveExecuteList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onResetExecuteList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onSaveExecuteList.Array.data[2]
+      value: 
+      objectReference: {fileID: 671820448848546678}
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onResetExecuteList.Array.data[0]
+      value: 
+      objectReference: {fileID: 671820448848546678}
     - target: {fileID: 5174487018390985142, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
       propertyPath: m_RootOrder
       value: 2

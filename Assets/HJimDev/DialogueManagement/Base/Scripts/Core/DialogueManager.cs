@@ -21,12 +21,12 @@ namespace DialogueManagement
                 [Serializable]
                 public class DataSet
                 {
-                    [SerializeField] UserDataManager user;
+                    [SerializeField] UserData user;
                     [SerializeField] Data.DialogueData dialogue;
-                    [SerializeField] SettingDataManager settings;
-                    public UserDataManager User { get { return user; } }
+                    [SerializeField] SettingData settings;
+                    public UserData User { get { return user; } }
                     public Data.DialogueData Dialogue { get { return dialogue; } }
-                    public SettingDataManager Settings { get { return settings; } }
+                    public SettingData Settings { get { return settings; } }
                 }
                 [Serializable]
                 public class KeyWords

@@ -8,3 +8,6 @@ Exit: Salir
 # Titles
 MainMenu: Main Menu
 Credits: Credits
+
+# Test
+WordWithAccent: áéíóúÁÉÍÓÚ

@@ -1,6 +1,7 @@
-# Example of achievements to unlock
+﻿# Example of achievements to unlock
 Caeli: Caeli Da Jim
 Sayah: Sayah Kubra
 Storyteller: Narrador
-CharacterA: Personaje A
-CharacterB: Personaje B
+CharacterA: Character A
+CharacterB: Character B
+Danna: Danna

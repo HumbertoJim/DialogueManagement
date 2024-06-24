@@ -45,5 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   files:
-  - {fileID: 4900000, guid: fbb6e3dc398e7aa46a482809266e2baf, type: 3}
-  - {fileID: 4900000, guid: 80b1d44892971a6498ca45e99973b7e5, type: 3}
+  - name: Choices
+    file: {fileID: 4900000, guid: fbb6e3dc398e7aa46a482809266e2baf, type: 3}
+  - name: Flags
+    file: {fileID: 4900000, guid: 80b1d44892971a6498ca45e99973b7e5, type: 3}
+  - name: Relationships
+    file: {fileID: 4900000, guid: fdcd87232dc518e4084fb828cddc2056, type: 3}
+  - name: Interactions
+    file: {fileID: 4900000, guid: b47384b6ad8429a40b53c3a17e767e09, type: 3}
+  equalKey: ':'

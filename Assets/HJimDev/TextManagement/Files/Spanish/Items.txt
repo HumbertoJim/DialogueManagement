@@ -1,4 +1,4 @@
-# Example of achievements to unlock
+﻿# Example of achievements to unlock
 HealthPotion: Pocima de Curacion
 AttackPotion: Pocima de Ataque
 SilverSword: Espada de plata

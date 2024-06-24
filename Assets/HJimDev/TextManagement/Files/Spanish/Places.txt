@@ -1,4 +1,4 @@
-# Example of Places
+﻿# Example of Places
 Garden: Jardin
 School: Colegio
 Mountain: Montana

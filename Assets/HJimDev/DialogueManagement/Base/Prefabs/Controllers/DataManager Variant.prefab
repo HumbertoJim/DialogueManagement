@@ -53,18 +53,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2738412077019869058, guid: b6bd62cafc2d7bf47b2a3e0a100867fd, type: 3}
       propertyPath: m_Name
-      value: DataManager
+      value: DataManager Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7173798580176864384, guid: b6bd62cafc2d7bf47b2a3e0a100867fd, type: 3}
       propertyPath: onSaveExecuteList.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7173798580176864384, guid: b6bd62cafc2d7bf47b2a3e0a100867fd, type: 3}
       propertyPath: onResetExecuteList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7173798580176864384, guid: b6bd62cafc2d7bf47b2a3e0a100867fd, type: 3}
+      propertyPath: onSaveExecuteList.Array.data[2]
+      value: 
+      objectReference: {fileID: 6117352878304797794}
+    - target: {fileID: 7173798580176864384, guid: b6bd62cafc2d7bf47b2a3e0a100867fd, type: 3}
       propertyPath: onSaveExecuteList.Array.data[3]
+      value: 
+      objectReference: {fileID: 6117352878304797794}
+    - target: {fileID: 7173798580176864384, guid: b6bd62cafc2d7bf47b2a3e0a100867fd, type: 3}
+      propertyPath: onResetExecuteList.Array.data[0]
       value: 
       objectReference: {fileID: 6117352878304797794}
     - target: {fileID: 7173798580176864384, guid: b6bd62cafc2d7bf47b2a3e0a100867fd, type: 3}
@@ -91,7 +99,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3800148860380750209, guid: c759da27cee64d4469005e93c3f3eade, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3800148860380750209, guid: c759da27cee64d4469005e93c3f3eade, type: 3}
       propertyPath: m_LocalPosition.x
