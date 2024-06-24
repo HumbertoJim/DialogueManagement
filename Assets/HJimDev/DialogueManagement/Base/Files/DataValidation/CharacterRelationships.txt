@@ -1,0 +1,4 @@
+# Example of character relationship points
+CharacterA: 0
+CharacterB: 0
+Danna: 0

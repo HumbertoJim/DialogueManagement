@@ -523,6 +523,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 671820450321239384}
     m_Modifications:
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onSaveExecuteList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onResetExecuteList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onSaveExecuteList.Array.data[2]
+      value: 
+      objectReference: {fileID: 671820448848546678}
+    - target: {fileID: 3993364404094666537, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
+      propertyPath: onResetExecuteList.Array.data[0]
+      value: 
+      objectReference: {fileID: 671820448848546678}
     - target: {fileID: 5174487018390985142, guid: 3eb0b8cf0eb878c4985fc71f25efacca, type: 3}
       propertyPath: m_RootOrder
       value: 2
