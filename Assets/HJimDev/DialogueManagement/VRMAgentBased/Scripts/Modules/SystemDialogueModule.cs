@@ -15,17 +15,27 @@ namespace DialogueManagement
             {
                 public override string ModuleName => "sys";
 
-                const string KEY_SLEEP = "sleep";
-                const string KEY_CHOICE = "choice";
-                const string KEY_FLAG = "flag"; // para configurar una variable.
+                [Header("Dependencies")]
+                [SerializeField] Core.ApplicationHandler applicationHandler;
+
+                const string EVENT_COMMAND = "event";
+                const string SLEEP_COMMAND = "sleep";
+                const string CHOICE_COMMAND = "choice";
+                const string FLAG_COMMAND = "flag"; // para configurar una variable.
 
                 const string KEY_CHOICE_SEPARATOR = "|";
 
                 public override void HandleCommand(string command)
                 {
-                    if (Tools.StringExtensions.TextStartsWith(command, KEY_CHOICE))
+                    if (Tools.StringExtensions.TextStartsWith(command, EVENT_COMMAND))
                     {
-                        command = command.Substring(KEY_CHOICE.Length).Trim();
+                        command = Tools.StringExtensions.CleanText(command.Substring(EVENT_COMMAND.Length));
+                        string eventID = command.Split(' ')[0];
+                        applicationHandler.HandleEvent(eventID, command.Substring(eventID.Length).Trim());
+                    }
+                    else if (Tools.StringExtensions.TextStartsWith(command, CHOICE_COMMAND))
+                    {
+                        command = command.Substring(CHOICE_COMMAND.Length).Trim();
 
                         dialogueManager.IsChoicing = true;
 
@@ -38,13 +48,13 @@ namespace DialogueManagement
                             choiceController.SetInformation(dialogueManager, command, i, choices[i].Trim());
                         }
                     }
-                    else if (Tools.StringExtensions.TextStartsWith(command, KEY_FLAG))
+                    else if (Tools.StringExtensions.TextStartsWith(command, FLAG_COMMAND))
                     {
                         dialogueManager.Data.Dialogue.SetFlag(command, true);
                     }
-                    else if (Tools.StringExtensions.TextStartsWith(command, KEY_SLEEP))
+                    else if (Tools.StringExtensions.TextStartsWith(command, SLEEP_COMMAND))
                     {
-                        command = command.Substring(KEY_SLEEP.Length).Trim();
+                        command = command.Substring(SLEEP_COMMAND.Length).Trim();
                         dialogueManager.Sleep(float.Parse(command));
                     }
                     else

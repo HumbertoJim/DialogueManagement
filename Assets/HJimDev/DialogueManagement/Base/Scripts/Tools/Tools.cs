@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Text.RegularExpressions;
 
 namespace DialogueManagement
 {
@@ -54,6 +55,27 @@ namespace DialogueManagement
                     }
                 }
                 return true;
+            }
+
+            public static string CleanText(string text, bool trim_start=true, bool trim_end=true, bool reduce_spaces=true)
+            {
+                if(reduce_spaces)
+                {
+                    text = Regex.Replace(text, @"\s+", " ");
+                }
+                if(trim_start && trim_end)
+                {
+                    text = text.Trim();
+                }
+                else if(trim_start)
+                {
+                    text = text.TrimStart();
+                }
+                else if (trim_end)
+                {
+                    text = text.TrimEnd();
+                }
+                return text;
             }
         }
     }

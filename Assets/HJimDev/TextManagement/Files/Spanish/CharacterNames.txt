@@ -4,3 +4,4 @@ Sayah: Sayah Kubra
 Storyteller: Narrador
 CharacterA: Personaje A
 CharacterB: Personaje B
+Danna: Danna
