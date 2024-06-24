@@ -65,8 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textManager: {fileID: 4025271643368675297}
   textType: UIElements
-  texts:
-  - {fileID: 0}
+  texts: []
 --- !u!1001 &3844861762353678067
 PrefabInstance:
   m_ObjectHideFlags: 0

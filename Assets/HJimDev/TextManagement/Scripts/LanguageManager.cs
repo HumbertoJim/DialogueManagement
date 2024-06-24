@@ -15,7 +15,7 @@ public class LanguageManager : BaseManager
 
     [Header("Validation File")]
     [SerializeField] private Document[] documents;
-    private const string equalKey = ":";
+    [SerializeField] private string equalKey = ":";
 
     public string Language { get { return language; } private set { language = value; } }
 

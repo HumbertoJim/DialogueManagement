@@ -1270,6 +1270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
+    - target: {fileID: 671820449913326744, guid: 3f0348897b306244eaa379e68c66d4b6, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 671820450509676666, guid: 3f0348897b306244eaa379e68c66d4b6, type: 3}
       propertyPath: storyteller
       value: 
