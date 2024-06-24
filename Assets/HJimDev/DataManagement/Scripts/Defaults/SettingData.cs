@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DataManagement.Managers;
 
-public class SettingDataManager : DictionaryManager
+public class SettingData : DictionaryManager
 {
     protected override void Awake() { Awake("Settings"); }
 

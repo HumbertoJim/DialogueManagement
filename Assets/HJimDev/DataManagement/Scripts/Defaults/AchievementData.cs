@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DataManagement.Managers;
 
-public class AchievementDataManager : BooleanDictionaryManager
+public class AchievementData : BooleanDictionaryManager
 {
     protected override void Awake()
     {
@@ -17,13 +17,13 @@ public class AchievementDataManager : BooleanDictionaryManager
 
     public bool GetAchievement(string achievementID)
     {
-        if (AchievementExists(achievementID)) return Serializer.GetDataAsBool(achievementID);
+        if (AchievementExists(achievementID)) return GetData(achievementID);
         return false;
     }
 
     public void SetAchievement(string achievementID, bool value)
     {
-        Serializer.SetData(achievementID, value ? "true" : "false");
+        SetData(achievementID, value);
         SaveData();
     }
 
@@ -33,7 +33,7 @@ public class AchievementDataManager : BooleanDictionaryManager
         Dictionary<string, bool> list = new Dictionary<string, bool>();
         foreach(string achievement in achievements)
         {
-            list.Add(achievement, Serializer.GetDataAsBool(achievement));
+            list.Add(achievement, GetData(achievement));
         }
         return list;
     }
@@ -44,7 +44,7 @@ public class AchievementDataManager : BooleanDictionaryManager
         List<string> list = new List<string>();
         foreach (string achievement in achievements)
         {
-            if(Serializer.GetDataAsBool(achievement))
+            if(GetData(achievement))
             {
                 list.Add(achievement);
             }
@@ -58,7 +58,7 @@ public class AchievementDataManager : BooleanDictionaryManager
         List<string> list = new List<string>();
         foreach (string achievement in achievements)
         {
-            if (!Serializer.GetDataAsBool(achievement))
+            if (!GetData(achievement))
             {
                 list.Add(achievement);
             }
