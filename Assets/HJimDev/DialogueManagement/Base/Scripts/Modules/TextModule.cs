@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace DialogueManagement
 {
-    namespace VRMAgentBased
+    namespace Base
     {
         namespace Modules
         {
-            public class TextDialogueModule : Base.Modules.Module
+            public class TextModule : Module
             {
-                public override string ModuleName => "txt";
+                public override string ModuleName => "text";
 
                 const string INITIAL_COMMAND = "initial";
                 const string EMPTY_OPTION = "-e";
@@ -19,19 +19,20 @@ namespace DialogueManagement
 
                 public override void HandleCommand(string command)
                 {
-                    if (command == INITIAL_COMMAND)
+                    if (Tools.StringExtensions.TextStartsWith(command, INITIAL_COMMAND))
                     {
+                        command = command[INITIAL_COMMAND.Length..].Trim();
                         if (Tools.StringExtensions.TextStartsWith(command, EMPTY_OPTION))
                         {
-                            command = command.Substring(EMPTY_OPTION.Length).Trim();
+                            command = command[EMPTY_OPTION.Length..].Trim();
                         }
                         else if (Tools.StringExtensions.TextStartsWith(command, ENTER_OPTION))
                         {
-                            command = command.Substring(ENTER_OPTION.Length).Trim() + "\n";
+                            command = command[ENTER_OPTION.Length..].Trim() + "\n";
                         }
                         else
                         {
-                            command = command.Substring(ENTER_OPTION.Length).Trim() + " ";
+                            command = command[ENTER_OPTION.Length..].Trim() + " ";
                         }
                         dialogueManager.InitialText = command;
                     }

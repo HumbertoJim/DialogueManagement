@@ -7,16 +7,13 @@ using System;
 
 namespace DialogueManagement
 {
-    namespace VRMAgentBased
+    namespace Base
     {
         namespace Modules
         {
-            public class SystemDialogueModule : Base.Modules.Module
+            public class SystemModule : Module
             {
                 public override string ModuleName => "sys";
-
-                [Header("Dependencies")]
-                [SerializeField] Core.ApplicationHandler applicationHandler;
 
                 const string EVENT_COMMAND = "event";
                 const string SLEEP_COMMAND = "sleep";
@@ -31,7 +28,7 @@ namespace DialogueManagement
                     {
                         command = Tools.StringExtensions.CleanText(command.Substring(EVENT_COMMAND.Length));
                         string eventID = command.Split(' ')[0];
-                        applicationHandler.HandleEvent(eventID, command.Substring(eventID.Length).Trim());
+                        dialogueManager.ApplicationHandler.HandleEvent(eventID, command.Substring(eventID.Length).Trim());
                     }
                     else if (Tools.StringExtensions.TextStartsWith(command, CHOICE_COMMAND))
                     {

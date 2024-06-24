@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace DialogueManagement
 {
-    namespace VRMAgentBased
+    namespace Base
     {
         namespace Modules
         {
-            public class CameraDialogueModule : Base.Modules.Module
+            public class CameraModule : Module
             {
                 public override string ModuleName => "camera";
 

@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace DialogueManagement
 {
-    namespace VRMAgentBased
+    namespace Base
     {
         namespace Modules
         {
-            public class ImageDialogueModule : Base.Modules.Module
+            public class ImageModule : Module
             {
                 [Header("Resources Settings")]
                 [SerializeField] string resourcesFolderLocation = "Dialogue/Images";
 
-                public override string ModuleName => "im";
+                public override string ModuleName => "image";
 
                 const string KEY_SHOW = "show";
                 const string KEY_HIDE = "hide";

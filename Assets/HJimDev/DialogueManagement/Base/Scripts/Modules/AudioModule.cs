@@ -6,11 +6,11 @@ using AudioManagement;
 
 namespace DialogueManagement
 {
-    namespace VRMAgentBased
+    namespace Base
     {
         namespace Modules
         {
-            public class AudioDialogueModule : Base.Modules.Module
+            public class AudioModule : Module
             {
                 public override string ModuleName => "audio";
 

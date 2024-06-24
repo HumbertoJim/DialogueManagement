@@ -9,21 +9,15 @@ namespace DialogueManagement
     {
         namespace Modules
         {
-            public class CharacterDialogueModule : Base.Modules.Module
+            public class CharacterModule : Base.Modules.CharacterModule
             {
-                public override string ModuleName => "ch";
-
-                const string INITIAL_COMMAND = "initial";
                 const string LOAD_COMMAND = "load";
-                const string MOOD_COMMAND = "";
-                const string ANIM_COMMAND = "";
-                const string MOVE_COMMAND = "";
-                const string ROTATE_COMMAND = "";
-                const string IMPROVE_RELATION_COMMAND = "";
-                const string DECREASE_RELATION_COMMAND = "";
-                const string REGISTER_INTERACTION_COMMAND = "";
-                const string ENABLE_COMMAND = "";
-                const string DISABLE_COMMAND = "";
+                const string MOOD_COMMAND = "mood";
+                const string ANIM_COMMAND = "anim";
+                const string MOVE_COMMAND = "move";
+                const string ROTATE_COMMAND = "rotate";
+                const string ENABLE_COMMAND = "enable";
+                const string DISABLE_COMMAND = "disable";
 
                 [Header("Dialoguers")]
                 [SerializeField] Core.DialoguerCluster dialoguers;
@@ -95,29 +89,6 @@ namespace DialogueManagement
                             }
                         }
                     }
-                    else if (Tools.StringExtensions.TextStartsWith(command, IMPROVE_RELATION_COMMAND))
-                    {
-                        command = command[IMPROVE_RELATION_COMMAND.Length..].Trim();
-                        string[] sentence = command.Split(' ');
-                        if (sentence.Length > 1)
-                        {
-                            dialoguers.ImproveRelationship(command, int.Parse(command[sentence[0].Length..].Trim()));
-                        }
-                    }
-                    else if (Tools.StringExtensions.TextStartsWith(command, DECREASE_RELATION_COMMAND))
-                    {
-                        command = command[DECREASE_RELATION_COMMAND.Length..].Trim();
-                        string[] sentence = command.Split(' ');
-                        if (sentence.Length > 1)
-                        {
-                            dialoguers.DecreaseRelationship(command, int.Parse(command[sentence[0].Length..].Trim()));
-                        }
-                    }
-                    else if (Tools.StringExtensions.TextStartsWith(command, REGISTER_INTERACTION_COMMAND))
-                    {
-                        command = command[REGISTER_INTERACTION_COMMAND.Length..].Trim();
-                        dialoguers.RegisterInteraction(command);
-                    }
                     else if (Tools.StringExtensions.TextStartsWith(command, ENABLE_COMMAND))
                     {
                         command = command[ENABLE_COMMAND.Length..].Trim();
@@ -130,7 +101,7 @@ namespace DialogueManagement
                     }
                     else
                     {
-                        dialogueManager.UI.ErrorMessages = "KEY CHARACTER COMMAND ERROR: invalid KEY COMMAND in \"" + command + "\"";
+                        base.HandleCommand(command);
                     }
                 }
             }
