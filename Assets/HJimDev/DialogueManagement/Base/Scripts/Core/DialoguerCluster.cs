@@ -19,6 +19,7 @@ namespace DialogueManagement
                 [SerializeField] Entities.Storyteller storyteller;
                 [SerializeField] Entities.Dialoguer[] dialoguers;
 
+                public DialogueManager DialogueManager { get { return dialogueManager; } }
                 public Entities.MainCharacter MainCharacter { get { return mainCharacter; } }
                 public Entities.Storyteller Storyteller { get { return storyteller; } }
                 public Entities.Dialoguer CurrentDialoguer { get; private set; }
@@ -138,6 +139,21 @@ namespace DialogueManagement
                 public Entities.Dialoguer GetDialoguer(string code)
                 {
                     return _dialoguers.GetValueOrDefault(code, null);
+                }
+
+                public void ImproveRelationship(string code, int value)
+                {
+                    DialogueManager.Data.Dialogue.ImproveRelationship(code, value);
+                }
+
+                public void DecreaseRelationship(string code, int value)
+                {
+                    DialogueManager.Data.Dialogue.DecreaseRelationship(code, value);
+                }
+
+                public void RegisterInteraction(string code)
+                {
+                    DialogueManager.Data.Dialogue.RegisterInteraction(code);
                 }
             }
         }
