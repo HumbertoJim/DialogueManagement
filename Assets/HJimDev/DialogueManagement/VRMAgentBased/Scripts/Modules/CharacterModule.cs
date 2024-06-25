@@ -12,6 +12,7 @@ namespace DialogueManagement
             public class CharacterModule : Base.Modules.CharacterModule
             {
                 const string LOAD_COMMAND = "load";
+                const string UNLOAD_COMMAND = "unload";
                 const string MOOD_COMMAND = "mood";
                 const string ANIM_COMMAND = "anim";
                 const string MOVE_COMMAND = "move";
@@ -20,7 +21,7 @@ namespace DialogueManagement
                 const string DISABLE_COMMAND = "disable";
 
                 [Header("Dialoguers")]
-                [SerializeField] Core.DialoguerCluster dialoguers;
+                [SerializeField] protected Core.DialoguerCluster dialoguers;
 
                 public override void HandleCommand(string command)
                 {
@@ -33,6 +34,16 @@ namespace DialogueManagement
                             dialoguer.Agent.Model.LookAt(dialoguers.MainCharacter.Agent.Model.Head);
                             dialoguer.Agent.Rotate(dialoguers.MainCharacter.Agent.Model.Transform);
                             dialoguer.Agent.EnableRandomAction = false;
+                        }
+                    }
+                    else if (Tools.StringExtensions.TextStartsWith(command, UNLOAD_COMMAND))
+                    {
+                        command = command[UNLOAD_COMMAND.Length..].Trim();
+                        Entities.Dialoguer dialoguer = dialoguers.GetDialoguer(command);
+                        if (dialoguer)
+                        {
+                            dialoguer.Agent.Model.LookAt(null);
+                            dialoguer.Agent.EnableRandomAction = true;
                         }
                     }
                     else if (Tools.StringExtensions.TextStartsWith(command, MOOD_COMMAND))
